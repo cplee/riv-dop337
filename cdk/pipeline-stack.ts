@@ -26,7 +26,9 @@ export class PipelineStack extends Stack {
           'yarn install'
         ],
         commands: [
-          'yarn cdk:synth'
+          'yarn lint',        // Run linting
+          'yarn test',        // Run unit tests
+          'yarn cdk:synth',    // Synthesize CDK app        ],
         ],
       }),
     });

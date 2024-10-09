@@ -12,7 +12,7 @@ export class EcsServiceStack extends Stack {
 
     const cluster = new Cluster(this, 'NestRecipesAppCluster', { vpc });
 
-    new ApplicationLoadBalancedFargateService(this, 'NestRecipesAppService', {
+    const service = new ApplicationLoadBalancedFargateService(this, 'NestRecipesAppService', {
       cluster,
       cpu: 256,
       desiredCount: 1,
@@ -24,6 +24,7 @@ export class EcsServiceStack extends Stack {
       publicLoadBalancer: true,
     });
 
+    service.targetGroup.configureHealthCheck({ path: "/api" });
   }
 }
 
